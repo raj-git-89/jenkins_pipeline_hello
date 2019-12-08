@@ -1,0 +1,31 @@
+pipeline{
+agent any
+stages{
+stage('Git ckeckout'){
+steps{
+git 'https://github.com/raj-git-89/maven-project.git'
+}
+}
+stage('Compile Code'){
+steps{
+withMaven(maven: 'local_maven') {
+    sh 'mvn compile'
+}
+}
+}
+stage('Test Code'){
+steps{
+withMaven(maven: 'local_maven') {
+    sh 'mvn test'
+}
+}
+}
+stage('Build Code'){
+steps{
+withMaven(maven: 'local_maven') {
+    sh 'mvn package'
+}
+}
+}
+}
+}
