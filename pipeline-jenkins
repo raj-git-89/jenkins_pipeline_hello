@@ -1,14 +1,24 @@
 pipeline {
 agent any
+stages{
+stage('cloning code'){
+steps{
+git 'https://github.com/prakashk0301/maven-project'
+echo 'Git Pull'
+}
+}
+stage('Get Approval')
+{
+steps{
+input 'Allow build in Maven?'
+}
+}
+stage('Maven Build'){
+steps{
+sh 'mvn clean install'
+echo 'Building Project.'
+}
+}
+}
+}
 
-stages
-{
-stage('cloning code')
-{
-steps 
-{git 'https://github.com/prakashk0301/maven-project'
-echo 'Hello'
-}
-}
-}
-}
