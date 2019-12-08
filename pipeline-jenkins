@@ -13,10 +13,10 @@ steps{
 input 'Allow build in Maven?'
 }
 }
-stage('Maven Build'){
+stage('Maven Compile'){
 steps{
-sh 'mvn clean install'
-echo 'Building Project.'
+sh 'mvn clean compile'
+echo 'Compile Project.'
 }
 }
 }
