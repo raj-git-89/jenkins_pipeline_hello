@@ -1,0 +1,24 @@
+pipeline{
+agent any
+stages{
+stage('Git ckeckout'){
+steps{
+git 'https://github.com/raj-git-89/maven-project.git'
+}
+}
+stage('Install Code'){
+steps{
+withMaven(maven: 'local_maven') {
+    sh 'mvn install'
+}
+}
+}
+stage('deploy to tomcat'){
+steps{
+sshagent (credentials: ['deploy-dev']) {
+sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.35.4/usr/share/tomcat/webapps'
+}
+}
+}
+}
+}
